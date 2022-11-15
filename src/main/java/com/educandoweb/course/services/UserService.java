@@ -42,11 +42,15 @@ public class UserService {
 		}
 	}
 	public User update(Long id, User obj) {
+		try {
 		User entity = repository.getReferenceById(id);
 		updateData(entity, obj);
 		return repository.save(entity);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+		
 	}
-
 	private void updateData(User entity, User obj) {
 		entity.setName(obj.getName());
 		entity.setEmail(obj.getEmail());
